@@ -7,7 +7,7 @@ import io
 import sqlite3
 import os
 
-dbpath = os.path.expanduser("~/aurdb.db")
+dbpath = os.path.expanduser("~/.aurdb.db")
 
 aur = AUR.RPC.AUR()
 
@@ -26,6 +26,7 @@ def chunks(l, n):
     for i in range(0, len(l), n):
         yield l[i:i+n]
 
+os.remove(dbpath+'.tmp')
 con = sqlite3.connect(dbpath+'.tmp')
 cur = con.cursor()    
 
