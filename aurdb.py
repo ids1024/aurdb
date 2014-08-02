@@ -24,8 +24,7 @@ def chunks(l, n):
     for i in range(0, len(l), n):
         yield l[i:i+n]
 
-os.remove('/tmp/aur.db')
-con = sqlite3.connect('/tmp/aur.db')
+con = sqlite3.connect('/tmp/aur.db.tmp')
 cur = con.cursor()    
 
 cur.execute("CREATE TABLE packages(Depends TEXT, Provides TEXT, Name TEXT PRIMARY KEY, URL TEXT, Maintainer TEXT, URLPath TEXT, MakeDepends TEXT, Replaces TEXT, PackageBaseID INT, OptDepends TEXT, License TEXT, OutOfDate INT, FirstSubmitted INT, CategoryID INT, CheckDepends TEXT, Conflicts, Description TEXT, NumVotes INT, Groups, LastModified INT, ID INT, PackageBase TEXT, Version TEXT)")
@@ -44,3 +43,5 @@ for chunk in chunks(packages, 100):
         con.commit()
 
 con.close()
+
+os.rename('/tmp/aur.db.tmp', '/tmp/aur.db')
