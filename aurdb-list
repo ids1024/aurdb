@@ -5,7 +5,6 @@ import sqlite3
 import os
 
 dbpath = os.path.expanduser("~/.aurdb.db")
-dbpath = "/tmp/aur.db"
 
 REPOCOLOR='\x1b[1;35m'
 PKGCOLOR='\x1b[1;39m'
