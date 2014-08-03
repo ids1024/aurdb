@@ -48,7 +48,7 @@ if args.update:
 
     cur.execute("CREATE TABLE packages("+sqlfields+")")
 
-    for chunk in chunks(packages, 250): 
+    for chunk in chunks(packages, 150): 
         for pkg in aur.info(list(chunk)):
             l=[]
             for i in fields:
