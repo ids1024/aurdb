@@ -8,7 +8,7 @@ import sqlite3
 import os
 import argparse
 
-pkglisturl = "http://cryptocrack.de/files/aurpkglist.txt.gz"
+pkglisturl = "https://aur.archlinux.org/packages.gz"
 dbpath = os.path.expanduser("~/.aurdb.db")
 fields = ('Depends', 'Provides', 'Name', 'URL', 'Maintainer', 'URLPath', 'MakeDepends', 'Replaces', 'PackageBaseID', 'OptDepends', 'License', 'OutOfDate', 'FirstSubmitted', 'CategoryID', 'CheckDepends', 'Conflicts', 'Description', 'NumVotes', 'Groups', 'LastModified', 'ID', 'PackageBase', 'Version')
 sqlfields = "Depends TEXT, Provides TEXT, Name TEXT PRIMARY KEY, URL TEXT, Maintainer TEXT, URLPath TEXT, MakeDepends TEXT, Replaces TEXT, PackageBaseID INT, OptDepends TEXT, License TEXT, OutOfDate INT, FirstSubmitted INT, CategoryID INT, CheckDepends TEXT, Conflicts, Description TEXT, NumVotes INT, Groups, LastModified INT, ID INT, PackageBase TEXT, Version TEXT"
@@ -38,7 +38,7 @@ if args.update:
     gzdata = urllib.request.urlopen(pkglisturl).read()
     gz = gzip.GzipFile(fileobj=io.BytesIO(gzdata))
     gz.readline() #Skip first line
-    data = gz.read().decode().replace("%2B","+")
+    data = gz.read().decode()
 
     packages = [i.split(' ')[0] for i in data.split('\n')] 
 
